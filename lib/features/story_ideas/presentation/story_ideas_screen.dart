@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/constants/app_theme.dart';
 import '../../../core/constants/app_constants.dart';
-import '../../../core/services/openai_service.dart';
+import '../../../core/services/huggingface_service.dart';
 import '../../../core/services/storage_service.dart';
 import '../../../shared/providers/story_idea_provider.dart';
 import '../../../shared/widgets/loading_overlay.dart';
@@ -409,8 +409,8 @@ class _StoryIdeasScreenState extends State<StoryIdeasScreen> {
       final storyIdeaProvider = Provider.of<StoryIdeaProvider>(context, listen: false);
       
       // Make sure the OpenAI service has the API key
-      final openaiService = Provider.of<OpenAIService>(context, listen: false);
-      openaiService.setApiKey(apiKey);
+      final huggingfaceService = Provider.of<HuggingFaceService>(context, listen: false);
+      huggingfaceService.setApiKey(apiKey);
       
       final storyIdea = await storyIdeaProvider.generateStoryIdea(
         projectId: 'default',

@@ -1,10 +1,10 @@
 class AppConstants {
   // API
-  static const String openaiApiUrl = 'https://api.openai.com/v1/chat/completions';
-  static const String openaiModel = 'gpt-4o-mini';
+  static const String huggingfaceApiUrl = 'https://api-inference.huggingface.co/models';
+  static const String huggingfaceModel = 'microsoft/DialoGPT-large';
   
   // Storage keys
-  static const String openaiApiKeyKey = 'openai_api_key';
+  static const String huggingfaceApiKeyKey = 'huggingface_api_key';
   static const String userProjectsKey = 'user_projects';
   static const String cachedResponsesKey = 'cached_responses';
   

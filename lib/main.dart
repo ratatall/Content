@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'core/constants/app_theme.dart';
-import 'core/services/openai_service.dart';
+import 'core/services/huggingface_service.dart';
 import 'core/services/storage_service.dart';
 import 'shared/providers/character_provider.dart';
 import 'shared/providers/world_provider.dart';
@@ -31,22 +31,22 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider<OpenAIService>(
-          create: (_) => OpenAIService(apiKey: StorageService.getApiKey()),
+        Provider<HuggingFaceService>(
+          create: (_) => HuggingFaceService(apiKey: StorageService.getApiKey()),
         ),
         ChangeNotifierProvider<CharacterProvider>(
           create: (context) => CharacterProvider(
-            Provider.of<OpenAIService>(context, listen: false),
+            Provider.of<HuggingFaceService>(context, listen: false),
           ),
         ),
         ChangeNotifierProvider<WorldProvider>(
           create: (context) => WorldProvider(
-            Provider.of<OpenAIService>(context, listen: false),
+            Provider.of<HuggingFaceService>(context, listen: false),
           ),
         ),
         ChangeNotifierProvider<StoryIdeaProvider>(
           create: (context) => StoryIdeaProvider(
-            Provider.of<OpenAIService>(context, listen: false),
+            Provider.of<HuggingFaceService>(context, listen: false),
           ),
         ),
       ],

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/constants/app_theme.dart';
 import '../../../core/constants/app_constants.dart';
-import '../../../core/services/openai_service.dart';
+import '../../../core/services/huggingface_service.dart';
 import '../../../core/services/storage_service.dart';
 import '../../../shared/providers/world_provider.dart';
 import '../../../shared/widgets/loading_overlay.dart';
@@ -412,8 +412,8 @@ class _WorldBuildingScreenState extends State<WorldBuildingScreen> {
       final worldProvider = Provider.of<WorldProvider>(context, listen: false);
       
       // Make sure the OpenAI service has the API key
-      final openaiService = Provider.of<OpenAIService>(context, listen: false);
-      openaiService.setApiKey(apiKey);
+      final huggingfaceService = Provider.of<HuggingFaceService>(context, listen: false);
+      huggingfaceService.setApiKey(apiKey);
       
       final world = await worldProvider.generateWorld(
         projectId: 'default',

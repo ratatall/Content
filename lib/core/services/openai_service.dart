@@ -1,9 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import '../constants/app_constants.dart';
 
 class OpenAIService {
-  static const String _baseUrl = AppConstants.openaiApiUrl;
+  static const String _baseUrl = 'https://api.openai.com/v1/chat/completions'; // Hardcoded since this is legacy
   String? _apiKey;
   
   OpenAIService({String? apiKey}) : _apiKey = apiKey;
@@ -29,7 +28,7 @@ class OpenAIService {
           'Authorization': 'Bearer $_apiKey',
         },
         body: jsonEncode({
-          'model': AppConstants.openaiModel,
+          'model': 'gpt-4o-mini', // Hardcoded since this is legacy
           'messages': [
             {
               'role': 'system',

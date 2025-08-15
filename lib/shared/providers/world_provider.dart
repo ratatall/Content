@@ -1,19 +1,19 @@
 import 'package:flutter/foundation.dart';
 import 'package:uuid/uuid.dart';
 import '../models/world_model.dart';
-import '../../core/services/openai_service.dart';
+import '../../core/services/huggingface_service.dart';
 import '../../core/services/firestore_service.dart';
 import '../../core/services/storage_service.dart';
 
 class WorldProvider extends ChangeNotifier {
-  final OpenAIService _openaiService;
+  final HuggingFaceService _aiService;
   final Uuid _uuid = const Uuid();
   
   List<World> _worlds = [];
   bool _isLoading = false;
   String? _error;
   
-  WorldProvider(this._openaiService);
+  WorldProvider(this._aiService);
   
   // Getters
   List<World> get worlds => _worlds;
@@ -68,7 +68,7 @@ class WorldProvider extends ChangeNotifier {
       } else {
         print('Generating new world description for: $name');
         // Generate new world description
-        generatedWorld = await _openaiService.generateWorldDescription(
+        generatedWorld = await _aiService.generateWorldDescription(
           genre: genre,
           setting: setting,
           tone: tone,

@@ -1,19 +1,19 @@
 import 'package:flutter/foundation.dart';
 import 'package:uuid/uuid.dart';
 import '../models/character_model.dart';
-import '../../core/services/openai_service.dart';
+import '../../core/services/huggingface_service.dart';
 import '../../core/services/firestore_service.dart';
 import '../../core/services/storage_service.dart';
 
 class CharacterProvider extends ChangeNotifier {
-  final OpenAIService _openaiService;
+  final HuggingFaceService _aiService;
   final Uuid _uuid = const Uuid();
   
   List<Character> _characters = [];
   bool _isLoading = false;
   String? _error;
   
-  CharacterProvider(this._openaiService);
+  CharacterProvider(this._aiService);
   
   // Getters
   List<Character> get characters => _characters;
@@ -65,7 +65,7 @@ class CharacterProvider extends ChangeNotifier {
       } else {
         print('Generating new profile for character: $name');
         // Generate new profile
-        generatedProfile = await _openaiService.generateCharacterProfile(
+        generatedProfile = await _aiService.generateCharacterProfile(
           name: name,
           role: role,
           genre: genre,

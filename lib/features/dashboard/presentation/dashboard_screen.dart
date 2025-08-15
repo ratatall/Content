@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/constants/app_theme.dart';
-import '../../../core/services/openai_service.dart';
+import '../../../core/services/huggingface_service.dart';
 import '../../../core/services/storage_service.dart';
 import '../../../shared/widgets/feature_card.dart';
 import '../../character_development/presentation/character_development_screen.dart';
@@ -158,17 +158,26 @@ class DashboardScreen extends StatelessWidget {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Set OpenAI API Key'),
+        title: const Text('Set Hugging Face API Key'),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text('Enter your OpenAI API key to enable AI features:'),
+            const Text('Enter your Hugging Face API key to enable AI features:'),
+            const SizedBox(height: 8),
+            const Text(
+              'Get your free API key from:\nhttps://huggingface.co/settings/tokens',
+              style: TextStyle(
+                fontSize: 12,
+                color: Colors.blue,
+                fontStyle: FontStyle.italic,
+              ),
+            ),
             const SizedBox(height: AppTheme.spacing16),
             TextField(
               controller: controller,
               decoration: const InputDecoration(
-                labelText: 'API Key',
-                hintText: 'sk-...',
+                labelText: 'Hugging Face API Key',
+                hintText: 'hf_...',
               ),
               obscureText: true,
             ),
@@ -187,9 +196,9 @@ class DashboardScreen extends StatelessWidget {
                   // Save API key using the correct method
                   await StorageService.saveApiKey(apiKey);
                   
-                  // Update the OpenAI service with the new API key
-                  final openaiService = Provider.of<OpenAIService>(context, listen: false);
-                  openaiService.setApiKey(apiKey);
+                  // Update the Hugging Face service with the new API key
+                  final huggingfaceService = Provider.of<HuggingFaceService>(context, listen: false);
+                  huggingfaceService.setApiKey(apiKey);
                   
                   Navigator.pop(context);
                   ScaffoldMessenger.of(context).showSnackBar(

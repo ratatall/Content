@@ -11,15 +11,15 @@ class StorageService {
   
   // API Key management
   static Future<void> saveApiKey(String apiKey) async {
-    await _prefs?.setString(AppConstants.openaiApiKeyKey, apiKey);
+    await _prefs?.setString(AppConstants.huggingfaceApiKeyKey, apiKey);
   }
   
   static String? getApiKey() {
-    return _prefs?.getString(AppConstants.openaiApiKeyKey);
+    return _prefs?.getString(AppConstants.huggingfaceApiKeyKey);
   }
   
   static Future<void> removeApiKey() async {
-    await _prefs?.remove(AppConstants.openaiApiKeyKey);
+    await _prefs?.remove(AppConstants.huggingfaceApiKeyKey);
   }
   
   // Cache management for offline access

@@ -1,19 +1,19 @@
 import 'package:flutter/foundation.dart';
 import 'package:uuid/uuid.dart';
 import '../models/story_idea_model.dart';
-import '../../core/services/openai_service.dart';
+import '../../core/services/huggingface_service.dart';
 import '../../core/services/firestore_service.dart';
 import '../../core/services/storage_service.dart';
 
 class StoryIdeaProvider extends ChangeNotifier {
-  final OpenAIService _openaiService;
+  final HuggingFaceService _aiService;
   final Uuid _uuid = const Uuid();
   
   List<StoryIdea> _storyIdeas = [];
   bool _isLoading = false;
   String? _error;
   
-  StoryIdeaProvider(this._openaiService);
+  StoryIdeaProvider(this._aiService);
   
   // Getters
   List<StoryIdea> get storyIdeas => _storyIdeas;
@@ -64,7 +64,7 @@ class StoryIdeaProvider extends ChangeNotifier {
       } else {
         print('Generating new story idea');
         // Generate new story idea
-        generatedIdea = await _openaiService.generateStoryIdea(
+        generatedIdea = await _aiService.generateStoryIdea(
           genre: genre,
           tone: tone,
           themes: themes,
