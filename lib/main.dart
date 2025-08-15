@@ -6,6 +6,8 @@ import 'core/constants/app_theme.dart';
 import 'core/services/openai_service.dart';
 import 'core/services/storage_service.dart';
 import 'shared/providers/character_provider.dart';
+import 'shared/providers/world_provider.dart';
+import 'shared/providers/story_idea_provider.dart';
 import 'features/dashboard/presentation/dashboard_screen.dart';
 
 void main() async {
@@ -34,6 +36,16 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<CharacterProvider>(
           create: (context) => CharacterProvider(
+            Provider.of<OpenAIService>(context, listen: false),
+          ),
+        ),
+        ChangeNotifierProvider<WorldProvider>(
+          create: (context) => WorldProvider(
+            Provider.of<OpenAIService>(context, listen: false),
+          ),
+        ),
+        ChangeNotifierProvider<StoryIdeaProvider>(
+          create: (context) => StoryIdeaProvider(
             Provider.of<OpenAIService>(context, listen: false),
           ),
         ),

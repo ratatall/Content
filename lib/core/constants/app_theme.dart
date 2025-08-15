@@ -133,7 +133,9 @@ class AppTheme {
   static MaterialColor createMaterialColor(Color color) {
     List<double> strengths = <double>[.05];
     Map<int, Color> swatch = <int, Color>{};
-    final int r = color.red, g = color.green, b = color.blue;
+    final int r = (color.r * 255.0).round() & 0xff;
+    final int g = (color.g * 255.0).round() & 0xff;
+    final int b = (color.b * 255.0).round() & 0xff;
 
     for (int i = 1; i < 10; i++) {
       strengths.add(0.1 * i);
@@ -147,6 +149,7 @@ class AppTheme {
         1,
       );
     }
+    // ignore: deprecated_member_use
     return MaterialColor(color.value, swatch);
   }
 }

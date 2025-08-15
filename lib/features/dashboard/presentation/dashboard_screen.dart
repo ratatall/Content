@@ -5,6 +5,8 @@ import '../../../core/services/openai_service.dart';
 import '../../../core/services/storage_service.dart';
 import '../../../shared/widgets/feature_card.dart';
 import '../../character_development/presentation/character_development_screen.dart';
+import '../../world_building/presentation/world_building_screen.dart';
+import '../../story_ideas/presentation/story_ideas_screen.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -61,8 +63,12 @@ class DashboardScreen extends StatelessWidget {
                     icon: Icons.public,
                     color: AppTheme.secondaryColor,
                     onTap: () {
-                      // TODO: Navigate to world building screen
-                      _showComingSoon(context, 'World Building');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const WorldBuildingScreen(),
+                        ),
+                      );
                     },
                   ),
                   FeatureCard(
@@ -81,8 +87,12 @@ class DashboardScreen extends StatelessWidget {
                     icon: Icons.lightbulb,
                     color: const Color(0xFF8B5CF6), // Purple variant
                     onTap: () {
-                      // TODO: Navigate to story ideas screen
-                      _showComingSoon(context, 'Story Ideas');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const StoryIdeasScreen(),
+                        ),
+                      );
                     },
                   ),
                 ],

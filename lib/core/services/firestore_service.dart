@@ -114,6 +114,17 @@ class FirestoreService {
     }
   }
   
+  static Future<void> deleteWorld(String worldId) async {
+    try {
+      await _firestore
+          .collection(AppConstants.worldsCollection)
+          .doc(worldId)
+          .delete();
+    } catch (e) {
+      throw Exception('Failed to delete world: $e');
+    }
+  }
+  
   // Scenes
   static Future<void> saveScene(Scene scene) async {
     try {
@@ -167,6 +178,17 @@ class FirestoreService {
           .toList();
     } catch (e) {
       throw Exception('Failed to load story ideas: $e');
+    }
+  }
+  
+  static Future<void> deleteStoryIdea(String storyIdeaId) async {
+    try {
+      await _firestore
+          .collection(AppConstants.storyIdeasCollection)
+          .doc(storyIdeaId)
+          .delete();
+    } catch (e) {
+      throw Exception('Failed to delete story idea: $e');
     }
   }
 }
